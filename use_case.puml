@@ -3,8 +3,8 @@ left to right direction
 skinparam packageStyle rectangle
 skinparam actorStyle awesome
 
-actor "Game Master"
-actor "Player"
+actor "Game Master"						as GM
+actor "Player" 							as PL
 
 package "Session" {
 	usecase "Create Session"			as CS
@@ -24,17 +24,17 @@ package "Scene" {
 	usecase "Delete Scene"				as DSC
 
 	usecase "Broadcast Scene"			as BSC
-	
+
 	usecase "Add Map"					as AM
 	usecase "Remove Map"				as RM
 
 	usecase "Toggle Fog of War"			as TFOW
-	
+
 	usecase "Place Token"				as PT
 	usecase "Move Token"				as MT
 
 	usecase "Load Scene"				as LSC
-	
+
 	usecase "Sync Token"				as ST
 
 	BSC ..> LSC <<include>>
@@ -65,5 +65,21 @@ package "Assets" {
 	usecase "Add Asset"					as AA
 	usecase "Remove Asset"				as RA
 }
+
+
+GM --> CS
+GM --> ES
+GM --> DS
+
+PL --> JS
+PL --> LS
+
+GM ----> CC
+GM ----> EC
+GM ----> DC
+
+PL ----> CC
+PL ----> EC
+PL ----> DC
 
 @enduml
