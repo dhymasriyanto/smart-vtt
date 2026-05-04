@@ -1,0 +1,69 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+skinparam actorStyle awesome
+
+actor "Game Master"
+actor "Player"
+
+package "Session" {
+	usecase "Create Session"			as CS
+	usecase "Edit Session"				as ES
+	usecase "Delete Session"			as DS
+	usecase "Generate Session Code"		as GSC
+
+	CS ..> GSC  <<include>>
+
+	usecase "Join Session"				as JS
+	usecase "Leave Session"				as LS
+}
+
+package "Scene" {
+	usecase "Create Scene"				as CSC
+	usecase "Edit Scene"				as ESC
+	usecase "Delete Scene"				as DSC
+
+	usecase "Broadcast Scene"			as BSC
+	
+	usecase "Add Map"					as AM
+	usecase "Remove Map"				as RM
+
+	usecase "Toggle Fog of War"			as TFOW
+	
+	usecase "Place Token"				as PT
+	usecase "Move Token"				as MT
+
+	usecase "Load Scene"				as LSC
+	
+	usecase "Sync Token"				as ST
+
+	BSC ..> LSC <<include>>
+	MT ..> ST <<include>>
+}
+
+package "Character" {
+	usecase "Create Character"			as CC
+	usecase "Edit Character"			as EC
+	usecase "Delete Character"			as DC
+
+	usecase "Assign Token To Character" as ATTC
+}
+
+package "Game" {
+	usecase "Roll Dice"					as RD
+	usecase "Apply Dice Result"			as ADR
+	usecase "Broadcast Dice Result"		as BDR
+	RD ..> BDR <<include>>
+}
+
+package "Communication" {
+	usecase "Send Message"				as SM
+	usecase "View Event Log"			as VEL
+}
+
+package "Assets" {
+	usecase "Add Asset"					as AA
+	usecase "Remove Asset"				as RA
+}
+
+@enduml
